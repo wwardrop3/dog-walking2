@@ -7,6 +7,7 @@ const walkerCities = getWalkerCities()
 const cities = getCities()
 
 
+
 //define function that returns all walkerCities objects that correspond with the walker that is clicked on...should return array of matching objects
 
 export const getAllCities = (walker) => {
@@ -49,22 +50,45 @@ const findWalker = (pets, walkers) => {
 export const Assignments = () => {
     let assignmentHTML = ""
     assignmentHTML = "<ul>"
+    let citynames = ""
+    
 
     for (const currentPet of pets) {
         const currentPetWalker = findWalker(currentPet, walkers)
         const allWalkerCities = getAllCities(currentPetWalker)
-        const walkerCityNames = getCityNames(allWalkerCities)
+        const walkerCityNamesArray = getCityNames(allWalkerCities)
+        
         assignmentHTML += `
             <li>
                 ${currentPet.name} is being walked by
-                ${currentPetWalker.name} in ${walkerCityNames}
+                ${currentPetWalker.name} in ${walkerCityNamesArray}
             </li>
         `
     }
 
     assignmentHTML += "</ul>"
+    
 
     return assignmentHTML
+
+
 }
 
 
+
+document.addEventListener(
+    "click",
+    (clickEvent) => {
+        const itemClicked = clickEvent.target
+        if (itemClicked.id.startsWith("walker")) {
+            const [,walkerId] = itemClicked.id.split("--")
+            for (const walker of walkers) {
+                if (walker.id === parseInt(walkerId)) {
+                    const allWalkerCities = getAllCities(walker)
+                    const walkerCityNamesArray = getCityNames(allWalkerCities)
+                    window.alert(`${walker.name} services ${walkerCityNamesArray}`)
+                }
+            }
+        }
+    }
+)

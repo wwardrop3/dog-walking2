@@ -1,8 +1,6 @@
 import { getCities } from "./database.js"
 
-
 const cities = getCities()
-
 export const CityList = () => {
     let citiesHTML = "<ol>"
 
