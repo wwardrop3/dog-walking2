@@ -79,9 +79,8 @@ export const Assignments = () => {
 document.addEventListener(
     "click",
     (clickEvent) => {
-        const itemClicked = clickEvent.target
-        if (itemClicked.id.startsWith("walker")) {
-            const [,walkerId] = itemClicked.id.split("--")
+        if (clickEvent.target.id.startsWith("walker")) {
+            const [,walkerId] = clickEvent.target.id.split("--")
             for (const walker of walkers) {
                 if (walker.id === parseInt(walkerId)) {
                     const allWalkerCities = getAllCities(walker)
